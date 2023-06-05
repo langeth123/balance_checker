@@ -152,12 +152,15 @@ async def start_handler():
                 stable_amount += sum([float(temp_data[i].replace(",", '.')) for i in x])
 
             btcb_amount = sum([float(temp_data[i].replace(",", '.')) for i in btcb_fields])
-            eth_amount = sum([float(temp_data[i].replace(",", '.')) for i in ["ETH_N", "ARB_N"]])
+            eth_amount = sum([float(temp_data[i].replace(",", '.')) for i in ["ETH_N", "ARB_N", "ZKSYNC_N"]])
             ftm_balance, matic_balance, avax_balance = temp_data["FTM_N"], temp_data["MATIC_N"], temp_data["AVAX_N"]
+            bsc_balance = temp_data["BSC_N"]
 
             all_balance_usd = round(float(btcb_amount) * PRICES["BTC"] + float(eth_amount) * PRICES["ETH"] +
                                float(ftm_balance.replace(",", '.')) * PRICES["FTM"] + float(matic_balance.replace(",", '.')) * PRICES["MATIC"] +
-                               float(avax_balance.replace(",", '.')) * PRICES["AVAX"] + stable_amount, 2)
+                               float(avax_balance.replace(",", '.')) * PRICES["AVAX"] + stable_amount + 
+                               float(bsc_balance.replace(",", '.')) * PRICES["BSC"], 2)
+    
 
             logger.info(f'[{item["address"]}] STABLES: {round(stable_amount, 2)} | BTCB: {btcb_amount}\n' +
                         f'FTM: {ftm_balance} | MATIC: {matic_balance} | AVAX: {avax_balance} | ' + 

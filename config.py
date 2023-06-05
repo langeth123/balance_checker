@@ -11,7 +11,7 @@ from time import sleep
 
 path = getcwd()
 CONNECTED_RPCS = {}
-DELAY = 1
+DELAY = 0.1
 
 
 
@@ -31,7 +31,7 @@ TOKENS = {
         "BSC": "0x55d398326f99059fF775485246999027B3197955",
         "MATIC": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
         "ARB": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
-        "AVAX": "0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7"
+        "AVAX": "0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7",
     },
     "USDC": {
         "ETH": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
@@ -39,7 +39,9 @@ TOKENS = {
         "FTM": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
         "MATIC": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
         "ARB": "0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8",
-        "AVAX": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E"
+        "AVAX": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
+        "ZKSYNC": "0x3355df6D4c9C3035724Fd0e3914dE96A5a83aaf4",
+        "OP": "0x7F5c764cBc14f9669B88837ca1490cCa17c31607"
     },
     "BTCB": {
         "BSC": "0x2297aEbD383787A160DD0d9F71508148769342E3",
@@ -56,7 +58,9 @@ RPC = {
     "MATIC": ["https://matic-mainnet.chainstacklabs.com"],
     "ARB": ["https://arb1.arbitrum.io/rpc"],
     "AVAX": ["https://api.avax.network/ext/bc/C/rpc"],
-    "GOERLY": ["https://eth-goerli.public.blastapi.io"]
+    "GOERLY": ["https://eth-goerli.public.blastapi.io"],
+    "ZKSYNC": ["https://mainnet.era.zksync.io"],
+    "OP": ["https://rpc.ankr.com/optimism"]
 }
 
 SUPPORTED_TICKERS = ["ETHUSDT", "BNBUSDT", "FTMUSDT", "MATICUSDT", "ARBUSDT", "AVAXUSDT", "BTCUSDT"]
