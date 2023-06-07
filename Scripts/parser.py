@@ -152,7 +152,7 @@ async def start_handler():
                 stable_amount += sum([float(temp_data[i].replace(",", '.')) for i in x])
 
             btcb_amount = sum([float(temp_data[i].replace(",", '.')) for i in btcb_fields])
-            eth_amount = sum([float(temp_data[i].replace(",", '.')) for i in ["ETH_N", "ARB_N", "ZKSYNC_N"]])
+            eth_amount = sum([float(temp_data[i].replace(",", '.')) for i in ["ETH_N", "ARB_N", "ZKSYNC_N", "OP_N"]])
             ftm_balance, matic_balance, avax_balance = temp_data["FTM_N"], temp_data["MATIC_N"], temp_data["AVAX_N"]
             bsc_balance = temp_data["BSC_N"]
 
