@@ -35,12 +35,17 @@ def get_all_tickers():
 
 PRICES  = get_all_tickers()
 
-async def check_data_token(token_address: str, net_name: str):
+async def check_data_token(token_address: str, net_name: str, token=False):
     try:
         web3 = choice(CONNECTED_RPCS[net_name])
         address = Web3.to_checksum_address(token_address)
 
-        token_contract  = web3.eth.contract(address=address, abi=ERC20_ABI)
+        if token is False:
+            token_contract  = web3.eth.contract(address=address, abi=ERC20_ABI)
+        
+        else:
+            token_contract  = web3.eth.contract(address=address, abi=token)
+
         decimals        = await token_contract.functions.decimals().call()
 
         return token_contract, decimals
@@ -50,7 +55,7 @@ async def check_data_token(token_address: str, net_name: str):
             logger.error(f'{net_name} - Ratelimited! Thread sleeping 15-30 seconds')
             await asyncio.sleep(randint(15, 30))
         else:
-            logger.error(f'[{token_address}] | {error}')
+            logger.error(f'[{token_address}] | {error} ({net_name})')
             await asyncio.sleep(2)
         return await check_data_token(token_address, net_name)
 
@@ -59,9 +64,13 @@ async def check_balance(way='stable', **kwargs):
         net_name, wallet = kwargs["net_name"], Web3.to_checksum_address(kwargs["wallet"])
         web3 = choice(CONNECTED_RPCS[net_name])
         if way == 'stable':
-
-            token_contract, token_decimal = await check_data_token(kwargs["token_address"], net_name)
-            balance = await token_contract.functions.balanceOf(wallet).call()
+            if kwargs["token_address"] not in TOKENS["STG"].values():
+                token_contract, token_decimal = await check_data_token(kwargs["token_address"], net_name)
+                balance = await token_contract.functions.balanceOf(wallet).call()
+            else:
+                token_contract, token_decimal = await check_data_token(kwargs["token_address"], net_name, token=STG)
+                balance = await token_contract.functions.locked(wallet).call()
+                balance = balance[0]
         else:
             token_decimal = 0
             balance = await web3.eth.get_balance(wallet)

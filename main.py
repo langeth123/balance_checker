@@ -16,7 +16,7 @@ async def connect_to_all_rpcs():
         
         CONNECTED_RPCS.update({net_name: temp})
     logger.success("Soft connected to all rpc's")
-        
+
 
 
 def main():

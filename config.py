@@ -22,7 +22,8 @@ with open(f"wallets.txt", "r") as f:
 with open(f"{path}\\Scripts\\erc20.json", "r", encoding='utf-8') as f:
     ERC20_ABI = load(f)
 
-
+with open(f"{path}\\Scripts\\stg.json", "r", encoding='utf-8') as f:
+    STG = load(f)
 
 
 TOKENS = {
@@ -48,27 +49,35 @@ TOKENS = {
         "MATIC": "0x2297aEbD383787A160DD0d9F71508148769342E3",
         "ARB": "0x2297aEbD383787A160DD0d9F71508148769342E3",
         "AVAX": "0x152b9d0FdC40C096757F570A51E494bd4b943E50"
+    },
+    "STG": {
+        "MATIC" : "0x3AB2DA31bBD886A7eDF68a6b60D3CDe657D3A15D",
+        "ARB"   : "0xfBd849E6007f9BC3CC2D6Eb159c045B8dc660268",
+        "BSC"   : "0xD4888870C8686c748232719051b677791dBDa26D",
+        "AVAX"  : "0xCa0F57D295bbcE554DA2c07b005b7d6565a58fCE",
+        "FTM"   : "0x933421675cDC8c280e5F21f0e061E77849293dba"
     }
 }
 
 RPC = {
-    "ETH": ["https://eth-mainnet.public.blastapi.io/"],
-    "BSC": ["https://bsc-dataseed3.ninicoin.io", "https://bsc-dataseed4.defibit.io", "https://bsc-dataseed.binance.org"],
-    "FTM": ["https://rpc.ftm.tools"],
-    "MATIC": ["https://matic-mainnet.chainstacklabs.com"],
-    "ARB": ["https://arb1.arbitrum.io/rpc"],
-    "AVAX": ["https://api.avax.network/ext/bc/C/rpc"],
+    "ETH": ["http://136.243.59.93:8545"],
+    "BSC": ["http://167.235.180.166:8545"],
+    "FTM": ["http://167.235.180.166:9545"],
+    "MATIC": ["http://148.251.126.86:8545"],
+    "ARB": ["http://136.243.59.93:8547"],
+    "AVAX": ["http://148.251.126.86:9650/ext/bc/2q9e4r6Mu3U68nU1fYjgbR6JvwrRx36CohpAX5UQxse55x1Q5/rpc"],
     "GOERLY": ["https://eth-goerli.public.blastapi.io"],
     "ZKSYNC": ["https://mainnet.era.zksync.io"],
-    "OP": ["https://rpc.ankr.com/optimism"]
+    "OP": ["http://148.251.126.86:9991"]
 }
 
-SUPPORTED_TICKERS = ["ETHUSDT", "BNBUSDT", "FTMUSDT", "MATICUSDT", "ARBUSDT", "AVAXUSDT", "BTCUSDT"]
+SUPPORTED_TICKERS = ["ETHUSDT", "BNBUSDT", "FTMUSDT", "MATICUSDT", "ARBUSDT", "AVAXUSDT", "BTCUSDT", "STGUSDT"]
 
 ether_fields = [f"{net}_N" for net in RPC.keys()]
 usdt_fields = [f"{net}_USDT" for net in TOKENS["USDT"].keys()]
 usdc_fields = [f"{net}_USDC" for net in TOKENS["USDC"].keys()]
 btcb_fields = [f"{net}_BTCB" for net in TOKENS["BTCB"].keys()]
+stg_fields  = [f"{net}_STG" for net in TOKENS["STG"].keys()]
 other_fields = ["ADDRESS", "USD_BALANCE"]
 
-FIELDS = [usdc_fields, usdt_fields, btcb_fields, ether_fields, other_fields]
+FIELDS = [usdc_fields, usdt_fields, btcb_fields, ether_fields, other_fields, stg_fields]
